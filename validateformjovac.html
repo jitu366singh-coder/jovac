@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+            margin: 5px 0;
+        }
+        .success {
+            color: green;
+        }
+        input {
+            display: block;
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
 
+<form id="form">
+    <input type="text" id="name" placeholder="Name">
+    <p class="error"></p>
+
+    <input type="email" id="email" placeholder="Email">
+    <p class="error"></p>
+
+    <button type="submit">Submit</button>
+</form>
+
+<p id="message"></p>
+
+<script>
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const inputs = document.querySelectorAll("input");
+        const errors = document.querySelectorAll(".error");
+        let isValid = true;
+
+        inputs.forEach((input, index) => {
+            if (input.value.trim() === "") {
+                errors[index].textContent = "Fill this field";
+                isValid = false;
+            } else {
+                errors[index].textContent = "";
+            }
+        });
+
+        if (isValid) {
+            document.getElementById("message").textContent =
+                "Form submitted successfully!";
+            document.getElementById("message").className = "success";
+        }
+    });
+</script>
+
+</body>
+</html>
